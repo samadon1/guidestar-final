@@ -66,7 +66,7 @@ class Reviews(models.Model):
     )
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE)
     name = models.TextField()
-    user_type = models.CharField(max_length = 10, choices = USER_TYPE, default='D')
+    user_type = models.CharField(max_length = 20, choices = USER_TYPE, default='Donor')
     date = models.DateTimeField(auto_now_add= True)
     comment = models.TextField()
     
