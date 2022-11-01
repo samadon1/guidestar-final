@@ -31,7 +31,7 @@ SECRET_KEY = 'kpk@63tra(3+e12fcq@k#&zy+3k1jqwm1va&x*rh208gdr5h^b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['proj-guidestar.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['guidestar-final.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
