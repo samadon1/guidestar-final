@@ -26,7 +26,7 @@ class Category(models.Model):
 class Ngo(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    organization_name = models.CharField(max_length=200)
+    organization_name = models.TextField()
     principal_officer = models.CharField(max_length=200, null= True, blank = False)
     contact_person = models.CharField(max_length=200, null= True, blank = True)
     phone_number = PhoneNumberField(max_length=40, null= True, blank = True)
