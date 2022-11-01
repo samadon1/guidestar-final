@@ -353,16 +353,16 @@ class Csv(models.Model):
 
 class ClaimProfile(models.Model):
     CONNECTIONS = (
-        ('Staff', 'Staff'),
-        ('Board member', 'Board member'),
-        ('Volunteer', 'Volunteer'),
-        ('Consultant', 'Consultant'),
+        ('S', 'Staff'),
+        ('B', 'Board member'),
+        ('V', 'Volunteer'),
+        ('C', 'Consultant'),
     )
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, null= False, blank = True)
     role = models.TextField(verbose_name="Briefly describe your role ", max_length=200, null= False, blank = True)
-    connection = models.CharField(verbose_name="How are you connected to the organization?", max_length=25, choices = CONNECTIONS, default='Staff')
+    connection = models.CharField(verbose_name="How are you connected to the organization?", max_length=9, choices = CONNECTIONS, default='Staff')
     phone = PhoneNumberField(max_length=40, null= False, blank = True)
     email_address = models.EmailField(max_length=254 , null= False, blank = True)
     organization_website = models.URLField(max_length=200, null= False, blank = True)
