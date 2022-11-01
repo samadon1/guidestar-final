@@ -1,0 +1,93 @@
+{% extends 'base/main.html' %} {% block content %}
+<div>
+  <img
+    class="donate-bg"
+    src="https://www.cpacanada.ca/-/media/cpa-digital-hub/featured-images/2019/12/hub_12_18_charity-hero-1200x900.jpg"
+    alt=""
+  />
+  <div class="stack-wrapper">
+    <div class="stack-content">
+      <div class="col-row-grid">
+        <div class="donate-text">
+          <h1>Donate to {{ngo.organization_name}}</h1>
+          <br><br>
+          <h4>Instructions to donate</h4>
+          <p>You can donate to this organization via</p>
+          <li>Bank or</li>
+          <li>Mobile money</li>
+          <br>
+
+          {% if request.user == ngo.host %}
+          
+          <a  href= "{% url 'update_donation' ngo.id %}" style="text-decoration: none">
+            <button class="btn btn-danger">Edit donation instructions</button>
+            <a/>
+          {% endif %}
+        </div>
+
+        <div>
+          <div>
+            <div class="donate-container padding">
+              <h1  class="bold">Payment Method</h1>
+              <br />
+              <div class="w3-bar w3-black">
+                <button
+                  class="w3-bar-item w3-button donation-btn"
+                  onclick="openCity('Bank')"
+                >
+                  Bank
+                </button>
+                <button
+                  class="w3-bar-item w3-button donation-btn"
+                  onclick="openCity('Momo')"
+                >
+                  Momo
+                </button>
+              </div>
+              <br />
+              <hr />
+              
+              {% if donation_instruction.bank_account_name and donation_instruction.bank_account_number  %}
+              <div id="Bank" class="donate">
+                <h3 class="bold">Bank details</h3>
+                <p>Name: <span class="bold">{{donation_instruction.bank_account_name}} </span></p>
+                <p>
+                  Acc. Number: <span class="bold">{{donation_instruction.bank_account_number}}</span>
+                </p>
+                
+              </div>
+              {% else %}
+              <p>No donation information</p>
+              {% endif %}
+
+              <!-- Todo -->
+              <!-- Add momo number -->
+              <!-- Buttons shouldn't show when empty  -->
+              
+              {% if donation_instruction.momo_name and donation_instruction.momo_number  %}
+              <div id="Momo" class="donate" style="display: none">
+                <h3 class="bold">Mobile Money details</h3>
+                <p>Name: <span class="bold">{{donation_instruction.momo_name}}</span></p>
+                <p>Acc. Number: <span class="bold">{{donation_instruction.momo_number}}</span></p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("donate");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(cityName).style.display = "block";
+  }
+</script>
+
+{% endblock %}

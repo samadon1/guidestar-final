@@ -1,0 +1,103 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+
+<!-- <h4>{{ user.username|title}}</h4> -->
+
+<div class="grid-padding w-80 d-block">
+    <h2>Verification requests</h2>
+    <br>
+    {% if request.user.is_superuser %}
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'user_profile' %}">All NGOs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'all_claim_request' %}">Claim requests <span class="badge btn-danger "> {{claim_count}}</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'verification' %}">Verification request <span class="badge btn-danger "> {{verification_count}}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'upload_csv' %}">Upload web data(CSV)</a>
+          </li>
+      </ul>
+    {% endif %}
+    <hr>
+
+    
+    <!-- {% if request.user.is_superuser %}
+    <button class="btn btn-primary" ><a class=' nav-link' href="{% url 'user_profile' %}"> 🗒️ All</a></button>
+    <button class="btn btn-primary" ><a class=' nav-link' href="{% url 'verified' %}"> ✅ Verified</a></button>
+    <button class="btn btn-primary" ><a class=' nav-link' href="{% url 'pending' %}"> ⏲️ Pending</a></button>
+    {% endif %} -->
+    <br>
+    Result: {{ngos.count}}
+
+    <div>
+        {% for ngo in ngos %}
+
+        <div>
+            <!-- {% if request.user == ngo.host %}
+            <button class="btn btn" ><a class=' nav-link' href="{% url 'update_ngo' ngo.id %}">Update</a></button>
+            <button class="btn btn" ><a class=' nav-link' href="{% url 'delete_ngo' ngo.id %}">Delete</a></button>
+            {% endif %} -->
+
+        
+            <div class="search-grid searchbox-effect ">
+
+
+                <div class="search-grid-img">
+                    {% if ngo.profile_picture %}
+                        <img src="{{ngo.profile_picture}}" >
+                    {% endif %}
+                </div>
+                <div class="search-item">
+                    <h3><a class="remove-style" href="{% url 'ngo' ngo.id %}">{{ngo.organization_name}}</a></h3>
+                    <p>
+                        <strong>Location:</strong> {{ngo.location}} <br>
+                        <strong>EIN:</strong> {{ngo.EIN}} <br>
+                        {{ngo.description}}
+                    </p>
+                    <div class="search-grid search-grid-sub ">
+                        <!-- <div>
+                            <img class="options-icons"
+                                src="https://cdn-icons.flaticon.com/png/512/2967/premium/2967188.png?token=exp=1656690616~hmac=09d373ad296b9128cfe1e816a0107875"
+                                alt="">
+                            <img class="options-icons" src="https://cdn-icons-png.flaticon.com/512/2997/2997155.png"
+                                alt="">
+                            <img class="options-icons"
+                                src="https://cdn-icons.flaticon.com/png/512/3059/premium/3059719.png?token=exp=1656690727~hmac=5ae07eb68b3583fbb058e328544a3446"
+                                alt="">
+                        </div> -->
+                        <div>
+
+                            <a href="{% url 'confirm_verification' ngo.id %}"><button class="btn btn-primary" >Confirm verification</button></a>
+                        </div>
+                    </div>
+
+
+                </div>
+                
+                
+            </div>
+            
+            
+
+        </div>
+        
+
+        {% endfor %}
+    </div>
+
+
+   
+
+
+
+</div>
+    
+
+
+{% endblock content %}

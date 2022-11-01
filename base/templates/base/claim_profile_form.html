@@ -1,0 +1,30 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<div>
+    
+        </h1>
+    <form class="form-border" method= 'POST' enctype='multipart/form-data'>
+        <h1>Validate your connection </h1>
+        <p>Provide info to validate your connection to this organization and request to update its profile.</p>
+
+       <strong>Consider the following before you submit this form:</strong>
+        <p>- You are authorized by this organization to update the information on its Nonprofit Profile</p>
+        <p>- You are your organization's primary contact </p>
+        <p>- You agree to our terms and conditions</p>
+
+        <p><strong>NB:-</strong>  Email address should be the same email you used to register your account</p>
+         
+        <br>
+        {% csrf_token %}
+         {% comment %} {{ form.media }} {% endcomment %}
+         {{form.as_p}}
+
+         <input type='submit' value= 'Submit'/>
+    </form>
+</div>
+
+
+
+{% endblock %}

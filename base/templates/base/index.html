@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/home.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/styles.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+    <title>Homepage</title>
+    
+</head>
+
+<body>
+    {% include 'base/navbar.html' %}
+    <br>
+
+    {% if request.user.is_superuser %}
+    <div class="edit-button">
+        <a href="{% url 'update_homepage' %}">
+            <button class="btn btn-primary">Edit Homepage Information</button>
+        </a>
+    </div>    
+    
+        {% endif %}
+        
+
+    
+
+    <div class="home">
+        <div>
+            <div class="home-grid section-pad">
+                <div class="home-grid-item">
+                    <h1>{{form.landing_title}}</h1>
+                    <p>
+                        {{form.landing_subtitle}}
+                    </p>
+                </div>
+                <div class="home-grid-item">
+                    {% if form.landing_image %}
+                    <img class="home-grid-item-img"
+                        src="{{form.landing_image.url}}" alt="" />
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <div class="home-form-style home-grid section-pad">
+            <div>
+                <form method="GET" action="{% url 'home' %}">
+                    <div class="input-group">
+                        <input size="50" name="q" type="text" class="form-control rounded"
+                            placeholder="GuideStar Basic Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="submit-search-btn">
+                            <h5>Search</h5>
+                        </button>
+                    </div>
+
+                    <!-- <input size="100" type = 'text'  placeholder = " search nonprofits by name, subject area, keyword, location... " > -->
+                    <!-- <input class="" type="submit" value="Search"> -->
+                </form>
+            </div>
+            <div>
+                <a href="{% url 'register' %}">
+                    <button class="register-btn" type="text">Register for free</button>
+
+                </a>
+                
+            </div>
+        </div>
+
+        <div class="home-features section-pad section-bp">
+            <div class="features-grid-item">
+                <h2>{{form.features_title}}</h2>
+            </div>
+            <div class="features-grid">
+                <div class="features-grid-item">
+                    {% if form.first_feature_image %}
+                    <img src="{{form.first_feature_image.url}}"
+                        alt="" />
+                        {% endif %}
+                    <h3>{{form.first_feature_title}}</h3>
+                    <p>
+                        {{form.first_feature_subtitle}}
+                    </p>
+                    <button type="text">Update now</button>
+                </div>
+                <div class="features-grid-item">
+                    {% if form.second_feature_image %}
+                    <img src="{{form.second_feature_image.url}}"
+                        alt="" />
+                        {% endif %}
+
+                    <h3>{{form.second_feature_title}}</h3>
+                    <p>
+                        {{form.second_feature_subtitle}}
+                    </p>
+                    <button type="text">Learn more</button>
+                </div>
+                <div class="features-grid-item">
+                    {% if form.third_feature_image %}
+                    <img src="{{form.third_feature_image.url}}"
+                        alt="" />
+                        {% endif %}
+                    <h3>{{form.third_feature_title}}</h3>
+                    <p>
+                        {{form.third_feature_subtitle}}
+                    </p>
+                    <button type="text">schedule Consultation</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-pad">
+            <div class="features-grid-item">
+                <h2>
+                    {{form.value_title}}
+                </h2>
+            </div>
+            <div class="home-grid">
+                <div class="features-details-text">
+                    <div>
+                        <h3>{{form.first_value_title}}</h3>
+                        <p>
+                           {{form.first_value_subtitle}}
+                        </p>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <h3>{{form.second_value_title}}</h3>
+                        <p>
+                           {{form.second_value_subtitle}}
+                        </p>
+                    </div>
+                    <br>
+
+                    <div>
+                        <h3>{{form.third_value_title}}</h3>
+                        <p>{{form.third_value_subtitle}}
+                        </p>
+                    </div>
+                </div>
+                <div class="features-details">
+                    {% if form.value_image %}
+                    <img src="{{form.value_image.url}}"
+                        alt="" srcset="" />
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="home-banner">
+            <h2>{{form.banner_title}}</h2>
+        </div>
+
+
+        <div class="testimonial section-pad">
+            <div class="home-grid">
+                <div class="testimonial-left">
+                    <h1>{{form.quote_decription_title}}</h1>
+                    <p>{{form.quote_decription_subtitle}}</p>
+
+                    <div class="features-grid-item">
+                        <button type="text">Update your profile now</button>
+
+                    </div>
+
+
+                </div>
+                <div>
+                    <p class="testimonial-text">{{form.quote_title}}</p>
+
+                    <br><br>
+                    <p> <strong>  — {{form.quote_name}} </strong> </p>
+                        <p> {{form.quote_position}}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% include "base/footer.html" %}
+</body>
+
+</html>

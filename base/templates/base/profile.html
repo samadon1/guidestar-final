@@ -1,0 +1,610 @@
+{% extends 'base/main.html' %} 
+<!DOCTYPE html>
+{% load static %}
+
+{% block content%}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet" href='{% static "profilepage/style.css" %}''> -->
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/partners_styles.css' %}">
+    <title>Profile Page</title>
+</head>
+
+
+<body>
+    <!-- {% if request.user == ngo.host %}
+    <a href="% url 'show_pdf' ngo.id %">Hello</a>
+    {% endif %} -->
+<!-- <br>
+    <a  href= "{% url 'donation_instruction' ngo.id %}" style="text-decoration: none">Make a donation<a/> -->
+    
+
+
+
+    <!-- Org profile details goes here -->
+    <div class="container">
+    
+        <p>
+            <a  href= "{% url 'index' %}" style="text-decoration: none">Home><a/>
+            <strong><a href="javascript:history.go(-1)" style="text-decoration: none" color='black'>Search results></a></strong>
+            <strong>{{ngo.organization_name}} </strong>
+        </p>
+        
+        <hr>
+
+        {% if request.user == ngo.host or request.user.is_superuser %}
+            {% if ngo.request == False and ngo.verified == False %}
+                <div class="alert alert-info" role="alert">
+                    Request for verification. <a href="{% url 'verification_request' ngo.id  %}" class="alert-link">Click here</a>. 
+                </div>
+            
+            {% endif %}
+        
+
+        {% endif %}
+
+
+
+        <div style="display:flex ;">
+            <h1>{{ngo.organization_name}}</h1>
+                {% if ngo.verified == True %}
+                <img height="45px" width="55px" style="padding-left: 10px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/512px-Twitter_Verified_Badge.svg.png" alt="">
+                {% endif %}
+        </div>
+        Category: {{ngo.category.name}}
+        
+
+        
+        <p>{{page.general_description}}</p>
+        <!-- <p>[Name of this website] approved since 2020</p> -->
+
+        <div class="img-container">
+            {% if page.first_page_image %}
+            <img src="{{page.first_page_image.url}}"
+                alt="">
+            {% else %}
+            <object style= "width:  85vw; height:30vw; object-fit: cover;" data="{{ngo.profile_picture}}" type="image/png">
+                <img style= "width:  85vw; height:30vw; object-fit: cover;" src="{{ngo.profile_picture.url}}" alt="Stack Overflow logo and icons and such">
+              </object>
+            <!-- <img style= "width:  85vw; height:30vw; object-fit: cover;" src="{{ngo.profile_picture}}"> -->
+            {% endif %}
+            {% if page.second_page_image %}
+            <img src="{{page.second_page_image.url}}"
+                alt="">
+                
+                {% else %}
+           
+            {% endif %}
+            
+        </div>
+
+        
+
+        <!-- Org profile more options goes here -->
+        <div class="options">
+
+            <h7><a class='nav-link' href={% url 'donation_instruction' ngo.id %}><img class="options-icons" src="https://img.icons8.com/wired/344/donate.png" alt=""> Donate</a></h7>
+            <h7> <img class="options-icons" src="https://img.icons8.com/ios-glyphs/344/share--v1.png" alt=""> Share</h7>
+            <h7> <img class="options-icons" src="https://img.icons8.com/ios-filled/344/gmail-new.png" alt=""> Contact
+            </h7>
+            <h7> <img class="options-icons"
+                    src="https://img.icons8.com/external-smashingstocks-mixed-smashing-stocks/344/external-partnership-productivity-concentration-smashingstocks-mixed-smashing-stocks.png"
+                    alt=""> Partner</h7>
+            <h7> <img class="options-icons" src="https://img.icons8.com/ios-filled/344/diamond-care-1.png" alt="">
+                Volunteer</h7>
+        </div>
+
+        
+
+
+    </div>
+
+    <!-- Org text details goes here -->
+    <div class="details-tab details-tab-bg">
+        <p>Who we are</p>
+        <p>What we do</p>
+        <p>Our impact</p>
+        <p>Work with us</p>
+        <p>Where donations go</p>
+    </div>
+
+    
+
+    <br><br>
+    
+    <div class="container grid">
+
+        
+
+        
+
+        
+
+              
+
+        <div style="margin-right: 100px;">
+
+            {% if not page.our_mission and not page.our_programs and not page.our_impact %}
+            <div>
+                <div style="border: 1px solid black; padding: 6%; margin-right: 50px; height: 300px; ">
+                
+                <br>
+                <h3>This profile needs more info.</h3>
+                <p>If it is your nonprofit, add a mission, program and impact overview.</p>
+                
+                <br>
+                {% if request.user == ngo.host or request.user.is_superuser %}
+                <button class="btn btn-primary" ><a class="nav-link" href="{% url 'update_ngo' ngo.id  %}"">Update</a></button>
+                {% else %}
+                <button class="btn btn-primary" ><a class="nav-link" href="{% url 'login'  %}"">Login and update</a></button>
+                {% endif %}
+            </div>
+            </div>
+              {% else %}
+            
+            <div class="mission">
+                <h2>Our Mission</h2>
+                <br>
+                <p>{{page.our_mission}}</p>
+                
+                <hr>
+
+
+            </div>
+
+            <div class="programs">
+                <h2>Our Programs</h2>
+                <p>{{page.our_programs}}</p>
+
+                <hr>
+             
+              
+                <br>
+                {% if programs.first_program_image %}
+                <img src="{{programs.first_program_image.url}}" >
+                {% endif %}
+                <br><br>
+                <h4>{{programs.first_program_headline}}</h4>
+                <p>{{programs.first_program_description}}</p>
+
+                <br>
+                {% if programs.first_program_image %}
+                <img src="{{programs.second_program_image.url}}" >
+                {% endif %}
+                <br><br>
+                <h4>{{programs.second_program_headline}}</h4>
+                <p>{{programs.second_program_description}}</p>
+
+                <br>
+                {% if programs.first_program_image %}
+                <img src="{{programs.third_program_image.url}}" >
+                <br>
+                {% endif %}
+                <br>
+                <h4>{{programs.third_program_headline}}</h4>
+                <p>{{programs.third_program_description}}</p>
+              
+
+
+                
+                
+                
+                <br>
+                <hr>
+                <br>
+                <h2>Our Impact</h2>
+                <br>
+                <p>{{page.our_impact}}</p>
+                <br><br>
+               {% if request.user == ngo.host %}
+    <a  href= "{% url 'new_blog' ngo.id %}" style="text-decoration: none"><button class="btn btn-primary">Add new post</button></a>
+        <br><br>
+    {% endif %}
+
+                {% if blog %}
+                {% for impact in blog %}
+                <div >
+                    {% if impact.blog_image %}
+                <img class="options-icons" style="width: 400px; height:350px;" src="{{impact.blog_image.url}}" alt="">
+                    
+                        {% else %}
+                        ...
+                {% endif %}
+                <br><br>
+                        <h2>{{impact.blog_title}}</h2>
+                    <p>{{impact.blog_subtitle}}</p>
+                    <a href="{% url 'blog' impact.id %}"><button class="btn btn-outline-primary" >Read more</button></a>
+                   <br><br>
+                    <hr>
+                </div>
+
+                {% endfor %}
+                <br>
+                <a href="{% url 'all_blogs' ngo.id %}"><button class="btn btn-primary" >See all posts >>></button></a>
+                {% else %}
+                No blogs                
+                {% endif %}
+                
+                
+                <hr>
+                <br><br>
+
+                <h2>Can you help us?</h2>
+                <br>
+                <p>{{page.support_us}}</p>
+                <div class="impact-padding">
+                    <img class="options-icons" src="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/344/external-community-friendship-and-relationship-inipagistudio-mixed-inipagistudio.png" alt="">
+                    <br><br>
+                    <h2>{{support.first_support_headline}}</h2>
+                    <br>
+                    <p>{{support.first_support_description}}
+                    </p>
+                    <br>
+                    <img class="options-icons" src="https://img.icons8.com/ios-filled/344/quill-with-ink.png" alt="">
+                    <br><br>
+                    <h2>{{support.second_support_headline}}</h2>
+                    <p>{{support.second_support_description}}
+                    </p>
+                    <br>
+                    <img class="options-icons" src="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/344/external-community-friendship-and-relationship-inipagistudio-mixed-inipagistudio.png" alt="">
+                    <br><br>
+                    <h2>{{support.third_support_headline}}</h2>
+                    <p>{{support.third_support_description}}</p>
+                    <br>
+                    <img class="options-icons" src="https://img.icons8.com/ios-filled/344/quill-with-ink.png" alt="">
+                    <br><br>
+                    <h2>{{support.fourth_support_headline}}</h2>
+                    <p>{{support.fourth_support_description}}</p>
+
+                    <br>
+                    <div class="donation-submit volunteer-btn">
+                        <input class="donation-btn" type="button" value="Volunteer">
+                    </div>
+
+
+
+                </div>
+                <br>
+                <hr>
+                <br><br>
+
+                <h2>How donation dollars are used</h2>
+                <p>{{page.donation}}
+                </p>
+                <div class="col-row-grid">
+                    <div class="col">
+                        {% if programs.first_program_image %}
+                        <img src="{{donation.first_donation_image.url}}"
+                            alt="">
+                            {% endif %}
+                        <p>{{donation.first_donation_description}}</p>
+
+                    </div>
+                    <div class="col">
+                        {% if programs.second_program_image %}
+                        <img src="{{donation.second_donation_image.url}}"
+                            alt="">
+                            {% endif %}
+                        <p>{{donation.second_donation_description}}</p>
+                    </div>
+                    <div class="col">
+                        {% if programs.third_program_image %}
+                        <img src="{{donation.third_donation_image.url}}"
+                            alt="">
+                            {% endif %}
+                        <p>{{donation.third_donation_description}}</p>
+                    </div>
+                    <div class="col">
+                        {% if donation.fourth_donation_image %}
+                        <img src="{{donation.fourth_donation_image.url}}"
+                            alt="">
+                            {% endif %}
+                        <p>{{donation.fourth_donation_description}}</p>
+                    </div>
+                </div>
+                <br>
+<hr>
+                <br>
+
+                {% if request.user.is_authenticated %}
+                <div>
+                    <h1>Our results</h1>
+                    <p>SOURCE: Self-reported by organization</p>
+                    <div style="display: flex; ">
+                        <div style=" padding: 5%; margin-right: 10px; border-radius: 20px;text-align:center; background-color: #150F99; color: white"  class="review-card">
+                            <p>Number of overall donors</p>
+                                <div  style="font-size: 100px;" id="donors">200</div>
+                                since 2019
+                                
+                        </div>
+                        <div style=" padding: 5%; border-radius: 20px; text-align:center; background-color: #150F99; color: white"  class="review-card">
+                            <p>Number of Organizational partners</p>
+                                <div style="font-size: 100px;" id="partners">20</div>
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+
+                <hr>
+                <br>
+                
+
+                    <div>
+                        <h1>Community Stories</h1>
+                            <p>{{review.count}} Stories from Volunteers, Donors & Supporters</p>
+                        {% if review %}
+                        <div class="card-content">
+                            
+                            <div  class="box" style="display: flex;">
+
+                                {% for comment in review %}
+                                <div class="review-card">
+                                    
+                                    <h3>{{comment.name}}</h3>
+                                    <p>{{comment.user_type}} {{comment.date}}</p>
+                                    <p>⭐⭐⭐⭐⭐</p>
+                                    <p>{{comment.comment}}</p>
+            
+                                </div>
+                                {% endfor %}
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <br><br>
+                        
+                       
+                    </div>
+
+                    
+
+                    
+
+                
+                
+                <div>
+                    <h2>Tell us your story</h2>
+                    <button class="btn btn-primary" ><a class="nav-link" href="{% url 'reviews' ngo.id %}">Add story >>></a></button>
+                  </div>
+
+                  {% else %}
+
+                  <div style="border: 1px solid black; padding: 6%;">
+                    <img width="200px" src="https://media.istockphoto.com/vectors/white-lock-icon-on-blue-circle-safety-sign-security-locked-button-vector-id1139724620?k=20&m=1139724620&s=170667a&w=0&h=AEb6rnFjshGuBcNOhkedcVTlXb9oRHr57OAq8vxAfxM=" alt="">
+                    <br>
+                    <h3>View Results and Community Stories by creating an account for free</h3>
+                    <p>Help us get you more of the nonprofit information you need, including:</p>
+                    <p> <span style="color: #150F99;">—</span>  More profile views</p>
+                    <p><span style="color: #150F99;">—</span> Additional tools and resources</p>
+                    <p><span style="color: #150F99;">—</span> And more...</p>
+                    <br>
+                    <button class="btn btn-primary" ><a class="nav-link" href="{% url 'login'  %}"">Create Free Account</a></button>
+                  </div>
+
+
+
+                  {% endif %}
+                  <br><br>
+                
+
+
+            </div>
+            
+            <h6> <strong> <a class= 'nav-link' href= "javascript:history.go(-1)" >< back to search results<a/></strong> </h6>
+        </div>
+        {% endif %}
+
+        
+
+
+
+        <!-- <div>
+            <div class="tags">
+                <h6> <span class="tags-img"><img class="options-icons"
+                            src="https://img.icons8.com/ios-filled/344/hospital.png" alt=""></span> Health</h6>
+                <h6> <span class="tags-img"><img class="options-icons"
+                            src="https://img.icons8.com/ios-filled/344/beggar.png" alt=""></span> Poverty</h6>
+                <h6> <span class="tags-img"><img class="options-icons"
+                            src="https://img.icons8.com/emoji/344/potable-water-emoji.png" alt=""></span> Clean water
+                </h6>
+                <h6> <span class="tags-img"><img class="options-icons"
+                            src="https://img.icons8.com/glyph-neue/344/education.png" alt=""></span> Education</h6>
+
+            </div> -->
+            
+
+            <div>
+                {% if ngo.host is None %}
+            <div style="padding: 10%; border: 1px solid black;  box-shadow:
+                rgb(0, 46, 250)
+                10px 10px 0
+                2px /* spread */">
+                
+                <h1>Is this your nonprofit ?</h1>
+                <br>
+                <form action="{% url 'claim_profile' ngo.id %}">
+                    <input class="btn btn-primary" type="submit" value="Claim your nonprofit for free" />
+                </form>
+                <!-- <a href="{% url 'claim_profile' ngo.id %}"><button class="btn btn-primary"><h4></h4></button></a> -->
+                <br>
+                <form action="{% url 'partners'%}">
+                    <input class="btn" type="submit" value="Learn about benefits" />
+                </form>
+                <!-- <a href="{% url 'partners' %}"><p>Learn about benefits</p></a> -->
+                </div>
+
+                {% else %}
+
+                {% endif %}
+                
+                <div class="tags location">
+                    <h4>Location</h4>
+                    <p>{{ngo.location}}</p>
+    
+                    <br>
+    
+                    <h4>EIN</h4>
+                    <p>{{ngo.EIN}}</p>
+    
+                    <br>
+    
+                    <h4>Principal Officer</h4>
+                    <p>{{ngo.principal_officer}}</p>
+    
+                    <br>
+    
+                    <h4>Phone</h4>
+                    <p>{{ngo.phone_number}}</p>
+                    <br>
+                    <h4>Email</h4>
+                    <p> {{ngo.email_address}} </p>
+    
+                </div>
+                
+            </div>
+            <br><br>
+
+            <br><br>
+            
+
+            <!-- <div class="tags donation">
+                <form action="">
+                    <input type="text" placeholder="Your name">
+                    <br><br>
+                    <select name="" id="">
+                        <option value="OKB Hope Foundation">OKB Hope Foundation</option>
+                        <option value="others">others</option>
+                    </select>
+                    <br><br>
+
+                    <div class="donation-type">
+                        <h5>one-time</h5>
+                        <h5>monthly</h5>
+                    </div>
+                    <br>
+
+
+                    <label for="one-time">
+                        <input type="radio" id="one" name="one-time" value="10">
+                        $10
+                    </label>
+                    <br>
+                    <label for="">
+                        <input type="radio" id="one" name="one-time" value="20">
+                        $20
+                    </label>
+                    <br>
+                    <label for="">
+                        <input type="radio" id="one" name="one-time" value="25">
+                        $25
+                    </label>
+                    <br>
+                    <label for="">
+                        <input type="radio" id="one" name="one-time" value="custom">
+                        Custom amount
+                    </label>
+
+
+                    <br><br>
+                    <textarea name="" id="" cols="30" rows="5"
+                        placeholder="Leave a message for us or the people we serve"></textarea>
+                        <br><br>
+                        
+
+                    
+
+    
+
+                    <input class="donation-btn" type="button" value="Make a donation">
+            </div> -->
+
+
+
+
+            
+
+
+        </div>
+
+        
+
+    
+    
+    <div class="other-non-profits ">
+        <h2>Discover Inspiring nonprofits</h2>
+        <br><br>
+
+        <div class="other-non-profit-grid suggestion">
+        {% for ngo in suggestions %}
+        <div class="other-container">
+            <object width="400px; " style="margin-right: 40px; margin-bottom: 20px; height: 300px" data="{{ngo.profile_picture}}" type="image/png">
+                <img width="400px; " style="margin-right: 40px; margin-bottom: 20px; height: 300px" src="{{ngo.profile_picture.url}}" alt="Stack Overflow logo and icons and such">
+              </object>
+             <!-- <img width="400px; " style="margin-right: 40px; margin-bottom: 20px; height: 300px" src="{{ngo.profile_picture.url}}" alt=""> -->
+             <a  href="{% url 'ngo' ngo.id %}"><h5>{{ngo.organization_name}}</h5></a>
+        </div>
+        
+        
+         {% endfor %}
+         
+        </div>
+        
+
+        
+        <hr>
+        {% include "base/footer.html" %}
+
+        
+    </div>
+
+
+
+
+    </div>
+
+
+    
+
+
+
+</body>
+
+<script>
+    function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = Math.floor(progress * (start - end) + end);
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+const obj1 = document.getElementById("donors");
+const obj2 = document.getElementById("partners");
+
+animateValue(obj1, 100, 0 , 5000);
+animateValue(obj2, 8, 0 , 5000);
+
+</script>
+
+
+
+</html>
+{% endblock content%}

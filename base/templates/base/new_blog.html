@@ -1,0 +1,20 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<div>
+    <form class="form-border" method= 'POST' enctype='multipart/form-data'>
+         {% csrf_token %}
+         
+         {{form.media}} 
+
+      
+         {{form.as_p}}
+
+         <input type='submit' value= 'Submit'/>
+    </form>
+</div>
+
+
+
+{% endblock content %}

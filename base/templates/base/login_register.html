@@ -1,0 +1,151 @@
+<div class="login-bg">
+    
+{% extends 'base/main.html' %}
+
+
+
+
+
+{% block content %}
+
+
+
+
+{% if page == 'login' %}
+
+
+{% if msg %}
+
+<div class="alert alert-danger" role="alert">
+    Username or password <strong>does not exist</strong> 
+  </div>
+
+{% endif %}
+
+{% if messages %}
+<div class="alert alert-success" role="alert">
+    User logged out
+  </div>
+{% endif %}
+
+
+
+<div class="login-text" >
+    <h1>Let's get started now !</h1>
+<p>or create an account if not registered yet </p>
+</div>
+<div class="login-form">
+    
+    
+    <form class="form-border" method = 'POST' action>
+        
+        {%csrf_token%}
+
+        
+        <h4>Login to Your Account</h4>
+        <br>
+
+        <!-- <label>Username:</label><br> -->
+        <input type = 'text' name = 'username' placeholder = 'username'/>
+        <br><br>
+        
+        <!-- <label>Password:</label><br> -->
+        <input  type = 'password' name = 'password' placeholder = 'password'/>
+        <br><br>
+       
+        <input class="btn btn-primary" type = 'submit' value = 'Login' />
+        <br>
+
+        <br>
+        <p>Haven't signed up yet?</p>
+        <a class="btn btn-dark" href= "{% url 'register' %}">Sign up</a>
+
+    </form>
+    
+</div>
+{% else %}
+{% comment %} <script>
+    function DoCheckUncheckDisplay(d,dchecked,dunchecked)
+    {
+       if( d.checked == true )
+       {
+          document.getElementById(dchecked).style.display = "block";
+          document.getElementById(dunchecked).style.display = "none";
+       }
+       else
+       {
+          document.getElementById(dchecked).style.display = "none";
+          document.getElementById(dunchecked).style.display = "block";
+       }
+    }
+ </script> {% endcomment %}
+ 
+
+<div class="col-row-grid">
+    <form class="form-border" method = 'POST' action>
+        {%csrf_token%}
+        {{form1.as_p}}
+
+      
+        {% comment %} <input type="checkbox" id='non_profit' onclick="DoCheckUncheckDisplay(this,'checkbox-checked','checkbox-unchecked')" style="margin:0;">
+        <label for='non_profit'>I am registering a non profit</label>
+         {% endcomment %}
+
+        <div>
+            
+            <div id="checkbox-checked" style="display:none; ">
+                {% if submitted %}
+                <br>
+                    Your Non-Profit was created succesfully!!
+    
+                {% else %}
+                <br><br>
+                    <form  class="form-border" method= 'POST' action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+    
+                        {{ form2.as_p}}
+                        
+                    </form>
+                {% endif %}
+            </div>
+            
+            <div>
+                <br><br>
+                <input class="btn btn-primary" type = 'submit' value = 'Register' />
+                <br><br>
+    
+                <p>Already signed up?</p>
+                <a class="btn btn-primary" href= "{% url 'login' %}">Login</a>
+            </div>
+    
+                
+            
+        </div>  
+        
+       
+
+            
+
+    </form>
+
+    <div class="tags location grid-margin">
+        <h4>How it works</h4>
+        <p>
+            1. You tell us about your organization and the great work you are doing.
+
+        </p>
+        <p>2. We will contact you to discuss your application </p>
+        <p>3. You will be notified when your profile is up and running!</p>
+        <br>
+
+    </div>
+    
+</div>
+{% endif%}
+
+
+
+
+{% endblock content %}
+
+</div>

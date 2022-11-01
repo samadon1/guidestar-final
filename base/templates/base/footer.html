@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'styles/styles.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="{% static 'styles/partners_styles.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="other-non-profits">
+      <div class="footer">
+        <div class="footer-details" >
+          <a href="{% url 'index' %}">
+            <h3>GuideStar</h3>
+
+          </a>
+          
+        </div>
+        <div class="footer-details">
+          <a href="{% url 'about_us' %}">
+            <h6>About Us</h6>
+          </a>
+          
+          <p >Who we are</p>
+          <p>How we work</p>
+          <p>Why Ghana</p>
+        </div>
+        <div class="footer-details">
+          <a href="{% url 'supporters' %}">
+            <h6 >For supporters</h6>
+
+          </a>
+          
+          <p>How you can help</p>
+          <p>Your impact</p>
+          <p>How it works</p>
+        </div>
+        <div class="footer-details">
+          <a href="{% url 'supporters' %}">
+            <h6 >For nonprofits</h6>
+
+          </a>
+          
+          <p>Showcase your work</p>
+          <p>Partnerships</p>
+          <p>Resources to grow</p>
+        </div>
+        <div class="footer-details">
+          <a href="{% url 'partners' %}">
+            <h6 >For businesses</h6>
+          </a>
+          
+          <p>Why nonprofits</p>
+          <p>Ways to partner</p>
+          <p>Our process</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

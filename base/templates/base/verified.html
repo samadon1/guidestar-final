@@ -1,0 +1,77 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+
+<!-- <h4>{{ user.username|title}}</h4> -->
+
+<div class="grid-padding w-80 d-block">
+    <h2>Your profile ({{ user.username|title}})</h2>
+    <br>
+    <button class="btn btn-primary" ><a class=' nav-link' href="{% url 'user_profile' %}"> 🗒️ All</a></button>
+    <button class="btn btn-primary" ><a class=' nav-link' href="{% url 'verified' %}"> ✅ Verified</a></button>
+    <button class="btn btn-primary" ><a class=' nav-link' href="{% url 'pending' %}"> ⏲️ Pending</a></button>
+    <br><br><br>
+
+    <div>
+        {% for ngo in ngos %}
+
+        <div>
+            {% if request.user == ngo.host %}
+            <button class="btn btn" ><a class=' nav-link' href="{% url 'update_ngo' ngo.id %}">Update</a></button>
+            <button class="btn btn" ><a class=' nav-link' href="{% url 'delete_ngo' ngo.id %}">Delete</a></button>
+            {% endif %}
+
+        
+            <div class="search-grid searchbox-effect ">
+
+
+                <div class="search-grid-img">
+                    {% if ngo.profile_picture %}
+                        <img src="{{ngo.profile_picture.url}}" >
+                    {% endif %}
+                </div>
+                <div class="search-item">
+                    <h3><a class="remove-style" href="{% url 'ngo' ngo.id %}">{{ngo.organization_name}}</a></h3>
+                    <p>
+                        Location: {{ngo.location}} <br>
+                        EIN: {{ngo.EIN}} <br>
+                        {{ngo.description}}
+                    </p>
+                    <div class="search-grid search-grid-sub ">
+                        <div>
+                            <img class="options-icons"
+                                src="https://cdn-icons.flaticon.com/png/512/2967/premium/2967188.png?token=exp=1656690616~hmac=09d373ad296b9128cfe1e816a0107875"
+                                alt="">
+                            <img class="options-icons" src="https://cdn-icons-png.flaticon.com/512/2997/2997155.png"
+                                alt="">
+                            <img class="options-icons"
+                                src="https://cdn-icons.flaticon.com/png/512/3059/premium/3059719.png?token=exp=1656690727~hmac=5ae07eb68b3583fbb058e328544a3446"
+                                alt="">
+                        </div>
+                        <div>
+
+                            <!-- <input class="search-donate-btn" type="button" value="Donate"> -->
+                        </div>
+                    </div>
+                    <small>{{ngo.category.name}}</small>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+
+   
+
+
+
+</div>
+    
+
+
+{% endblock content %}

@@ -1,0 +1,98 @@
+
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    padding-top: 5%;
+}
+
+.home-grid-item>h1 {
+    font-size: 60px;
+}
+
+.home-grid-item>p {
+    padding-top: 5%;
+    font-size: 25px;
+}
+
+
+.home-grid-item>img {
+    width: 100%;
+
+}
+
+.home-form-style {
+    padding-right: 30%;
+}
+
+.register-btn {
+    margin-left: 5%;
+    padding: 1% 2%;
+}
+
+.home-features {
+    padding-top: 10%;
+    margin: 80px 0;
+    background-color: #EFECEA;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+}
+
+.features-grid-item > img  {
+    width: 50%;
+    margin-bottom: 50px;
+}
+
+.features-grid-item > button {
+    padding: 10px 50px;
+    background-color: #150F99;
+    color: white;
+    border: None;
+
+}
+
+.features-grid-item > h2 {
+    font-size: 50px;
+}
+
+.features-details > img {
+    width: 60%;
+    padding-left: 50px;
+}
+
+.features-details-text {
+    padding-top: 40px;
+}
+
+.testimonial-text {
+    font-size: 25px;
+    padding-right: 50px;
+}
+
+.testimonial {
+    margin: 80px 0;
+}
+
+.section-pad {
+    padding-left: 10%;
+}
+
+.section-bp {
+    padding-bottom: 10%;
+}
+
+.home-banner {
+    background-color: #150F99;
+    color: white;
+    padding: 4% 10%;
+    margin-top: 5%;
+}
+
+.testimonial-left {
+    border-right: 1px solid #150F99;
+    margin-right: 30px;
+}

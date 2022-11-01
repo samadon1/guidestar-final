@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/styles.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/partners_styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Partners</title>
+</head>
+
+<body>
+
+    
+
+
+    <!-- Navbar goes here -->
+    {% include "base/navbar.html" %}
+
+    
+
+
+
+    <div class="landing-grid">
+        
+        <div class="landing-grid-text">
+            {% if request.user.is_superuser %}
+    <div style="margin: 0;"  class="edit-button">
+        <a href="{% url 'update_partners' %}">
+            <button class="btn btn-primary">Edit Partners Information</button>
+        </a>
+    </div>    
+    
+        {% endif %}
+            
+            <h1>Business-nonprofit Partnerships</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium odio, quisquam nemo .</p>
+        </div>
+        <div class="landing-grid-img">
+            <img src="https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?cs=srgb&dl=pexels-evg-kowalievska-1170979.jpg&fm=jpg"
+                alt="">
+                
+        </div>
+        
+    </div>
+
+    <div class="benefits-partner">
+        <h1>Benefits of Partnership</h1>
+        <br>
+
+        <p>Reprehenderit esse labore id veniam ut veniam non ex adipisicing amet ullamco dolor proident. Exercitation
+            velit ea incididunt sit qui do ipsum fugiat laboris minim nostrud dolor qui. Reprehenderit esse labore id
+            veniam ut veniam non ex adipisicing.</p>
+        <br>
+        <div class="center">
+
+
+            <input class="donation-submit volunteer-btn donation-btn " type="button" value="Search for a partner">
+        </div>
+
+    </div>
+    <br>
+
+    <div class="benefits-grid">
+        <div class="benefits-grid-items">
+            <img class="options-icons" src="https://img.icons8.com/ios-filled/344/quill-with-ink.png" alt="">
+            <h3>Corporate social responsibility</h3>
+            <br>
+            <p>amet nostrud quis commodo do sunt aute nulla ad aute minim duis duis sit et culpa consectetur et enim
+                mollit</p>
+        </div>
+        <div class="benefits-grid-items">
+            <img class="options-icons" src="https://img.icons8.com/ios-filled/344/quill-with-ink.png" alt="">
+
+            <h3>Corporate social responsibility</h3>
+            <br>
+            <p>amet nostrud quis commodo do sunt aute nulla ad aute minim duis duis sit et culpa consectetur et enim
+                mollit</p>
+        </div>
+        <div class="benefits-grid-items">
+            <img class="options-icons" src="https://img.icons8.com/ios-filled/344/quill-with-ink.png" alt="">
+
+            <h3>Corporate social responsibility</h3>
+            <br>
+            <p>amet nostrud quis commodo do sunt aute nulla ad aute minim duis duis sit et culpa consectetur et enim
+                mollit</p>
+        </div>
+        <div class="benefits-grid-items">
+            <img class="options-icons" src="https://img.icons8.com/ios-filled/344/quill-with-ink.png" alt="">
+
+            <h3>Corporate social responsibility</h3>
+            <br>
+            <p>amet nostrud quis commodo do sunt aute nulla ad aute minim duis duis sit et culpa consectetur et enim
+                mollit</p>
+        </div>
+
+    </div>
+    <br><br>
+
+    <div class="other-non-profits">
+        <div class="div-text-center">
+            <br><br>
+            <h1>Ways to partner</h1>
+            <br>
+            <p>Reprehenderit esse labore id veniam ut veniam non ex adipisicing</p>
+
+        </div>
+        <br><br>
+
+        <div class="other-non-profit-grid">
+            <div class="other-container">
+                <img src="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="">
+                <p>Lorem quis sunt magna dolor consectetur aliqua officia laborum reprehenderit</p>
+            </div>
+
+            <div class="other-container">
+                <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="">
+                <p>Lorem quis sunt magna dolor consectetur aliqua officia laborum reprehenderit</p>
+            </div>
+
+            <div class="other-container">
+                <img src="https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="">
+                <p>Lorem quis sunt magna dolor consectetur aliqua officia laborum reprehenderit</p>
+            </div>
+            <br>
+
+        </div>
+    </div>
+
+    <div class="our-process-grid">
+        <div class="our-process-grid-items div-text-center">
+            <img src="https://images.pexels.com/photos/3259624/pexels-photo-3259624.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="">
+        </div>
+        <div class="our-process-grid-items">
+            <h1>Our Process</h1>
+            <p>Reprehenderit esse labore id veniam ut veniam non ex adipisicing amet ullamco dolor proident.
+                Exercitation velit ea incididunt sit qui do ipsum fugiat laboris minim</p>
+
+            <div class="our-process-subgrid">
+                <div class="our-process-subgrid-items">
+                    <h3>Nulla ut ea</h3>
+                    <p>Reprehenderit esse labore id veniam ut veniam non ex adipisicing amet ullamco</p>
+                </div>
+
+                <div class="our-process-subgrid-items">
+                    <h3>Nulla ut ea</h3>
+                    <p>Reprehenderit esse labore id veniam ut veniam non ex adipisicing amet ullamco</p>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="discover discover-bg">
+        <h1>Discover inpiring nonprofits</h1>
+        <br>
+
+        
+        <div  style="width: 80%; padding-left: 20%;" class="home-form-style home-grid section-pad">
+            <div>
+                <form method="GET" action="{% url 'home' %}">
+                    <div class="input-group">
+                        <input size="50" name="q" type="text" class="form-control rounded"
+                            placeholder="GuideStar Basic Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="submit-search-btn">
+                            <h5>Search</h5>
+                        </button>
+                    </div>
+
+                    <!-- <input size="100" type = 'text'  placeholder = " search nonprofits by name, subject area, keyword, location... " > -->
+                    <!-- <input class="" type="submit" value="Search"> -->
+                </form>
+            </div>
+        </div>
+        <br>
+
+        <div class="discover-tags">
+            <div class="discover-tags-item">
+                <img src="https://img.icons8.com/color/2x/health-book.png"
+                    alt="">
+                <p>Health</p>
+
+            </div>
+            <div class="discover-tags-item">
+                <img src="https://img.icons8.com/color/344/law.png" alt="">
+                <p>Human rights</p>
+
+            </div>
+            <div class="discover-tags-item">
+                <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-environment-industry-flaticons-lineal-color-flat-icons.png"
+                    alt="">
+                <p>Environment</p>
+
+            </div>
+            <div class="discover-tags-item">
+                <img src="https://img.icons8.com/color/344/teaching.png" alt="">
+                <p>Education</p>
+
+            </div>
+            <div class="discover-tags-item">
+                <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/344/external-religions-religion-flaticons-flat-flat-icons.png"
+                    alt="">
+                <p>Religion</p>
+
+            </div>
+            <div class="discover-tags-item">
+                <img src="https://img.icons8.com/officel/344/cow-breed.png" alt="">
+                <p>Animals</p>
+                <br>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <img class="cover-img"
+            src="https://images.pexels.com/photos/3845806/pexels-photo-3845806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="">
+    </div>
+
+    {% include "base/footer.html" %}
+</body>
+
+</html>

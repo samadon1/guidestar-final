@@ -1,0 +1,268 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        /* background-color: whitesmoke; */
+    }
+</style>
+
+<div class="form-style ">
+
+    <form method='GET' action="{% url 'home' %}">
+        
+        
+        <div class="input-group">
+            <input size="50" name='q' value="{{request.GET.q}}" type="text" class="form-control rounded"
+                placeholder="search nonprofits by name, subject area, keyword, location..." aria-label="Search"
+                aria-describedby="search-addon" />
+            
+            </input>
+            
+            <button type="submit" class="submit-search-btn">
+                <h5>🔍</h5>
+            </button>
+            
+        </div>
+        <br>
+        {{my_filter.form}}
+
+        <!-- <input size="100" type = 'text'  placeholder = " search nonprofits by name, subject area, keyword, location... " > -->
+        <!-- <input class="" type="submit" value="Search"> -->
+    </form>
+
+</div>
+<!-- <br><br><br> -->
+
+<hr>
+
+<div class="search-grid-item">
+    <!-- <h5>{{ngo_count}} ngo(s) available </h5>   -->
+</div>
+
+<div class="search-grid grid-padding">
+    <div  class="search-grid-item">
+        <h2>Causes</h2>
+         Results: {{ngo_count}}
+        <div  class="  checkbox" >
+            
+            
+            <div>
+                
+                    <br>
+            </div >
+            <form   action="/home/" method="GET">
+                <div style="display: flex;">
+                    <button style=" margin-right: 5px;" type="submit" class="btn btn-primary">
+                        Update filters
+                    </button>
+                    <br>
+                    <button class="btn " ><a style="text-decoration:None; "  href="{% url 'home' %}">Clear filters</a></button>
+                </div>
+                    <br>
+                    <div class="itemconfiguration">
+                
+                    {% comment %} {% csrf_token %} {% endcomment %}
+                {% for category in categories %}
+                    {% if category.name|length < 20 %}
+                        <div >
+                            <h5 >
+                                <input  type="checkbox" name="checkbox" id="" value="{{category.name}}" {% if category.name in filters %} checked {% else %} '' {% endif %}>
+                                 {{category.name}}</h5>
+                            <br>
+                        </div>
+                    {% else %}
+                        <div>
+                            <h5><input type="checkbox" name="checkbox" id="" value="{{category.name}}" {% if category.name in filters %} checked {% else %} '' {% endif %}> {{category.name|truncatechars:20}}</h5>
+                            <br>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                    </div>
+                
+                
+            </form>
+        </div>
+
+    </div>
+
+    <div class="">
+
+        <div>
+            {% if not ngos %}
+            <div class="error"  style=" text-align: center;">
+                <img width="50" src="https://www.pngkey.com/png/detail/672-6722829_no-result-found.png" alt="">
+                <h4 >Sorry, no results found.</h4>
+            <!-- Suggestions:
+            
+                <li>Make sure all words are spelled correctly</li> 
+                <li>Try different keywords</li> 
+                <li>Try more general keywords</li> -->
+            
+            </div>
+            {% else %}
+            {% for ngo in ngos %}
+
+            <div class="search-bg">
+
+
+                <!--<span>@{{ngo.host.username}}</span>-->
+                <div class="search-grid searchbox-effect ">
+                    <!-- {% if request.user == ngo.host %}
+                    <a class=' nav-link' href="{% url 'update_ngo' ngo.id %}">Update</a>
+                    <a class=' nav-link' href="{% url 'delete_ngo' ngo.id %}">Delete</a>
+                    {% endif %} -->
+
+                    <div class="search-grid-img">
+                        {% if ngo.profile_picture %}
+                        <object style="width: 90%; float: left; border-radius: 5px;" class="search-grid-img" data="{{ngo.profile_picture}}" type="image/png">
+                            <img  style="width: 90%; float: left; border-radius: 5px;" class="search-grid-img"  src="{{ngo.profile_picture.url}}" alt="profile picture">
+                          </object>
+                            <!-- <img src="{{ngo.profile_picture}}" > -->
+                        {% endif %}
+                    </div>
+                    <div class="search-item">
+                        <div>
+                            <h3><a class="remove-style" href="{% url 'ngo' ngo.id %}">{{ngo.organization_name}}</a>
+                            {% if ngo.verified == True %}
+                            <img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/512px-Twitter_Verified_Badge.svg.png" alt="">
+                            {% endif %}
+                        </div>
+                        
+                        
+                            
+                        </h3>
+                        
+                        
+
+                      
+                        <p>
+                            
+                            <strong>  <small>{{ngo.location}}</small> </strong> 
+                             ,
+                            <strong>EIN:</strong>  <small> {{ngo.EIN}}</small> <br>
+                            
+                             {{ngo.description}}
+                             <br>
+                             <strong>Causes:</strong>  <small>{{ngo.category.name}}</small>
+                            
+                        </p>
+                        
+                        
+                        <div class="search-grid search-grid-sub ">
+                            <!-- <div>
+                                <img class="options-icons"
+                                    src="https://cdn-icons.flaticon.com/png/512/2967/premium/2967188.png?token=exp=1656690616~hmac=09d373ad296b9128cfe1e816a0107875"
+                                    alt="">
+                                <img class="options-icons" src="https://cdn-icons-png.flaticon.com/512/2997/2997155.png"
+                                    alt="">
+                                <img class="options-icons"
+                                    src="https://cdn-icons.flaticon.com/png/512/3059/premium/3059719.png?token=exp=1656690727~hmac=5ae07eb68b3583fbb058e328544a3446"
+                                    alt="">
+                            </div> -->
+                            
+                        </div>
+                        
+
+
+                    </div>
+                    
+                    <div class="dropdown">
+                        {% if request.user.is_superuser %}
+                        <span> <img class="kebab-img" src="https://img.icons8.com/ios/344/menu-2.png" alt=""> </span>
+                        
+                        <div class="card-right-item" >
+                            
+                            <div class="dropdown-content">
+
+                                <button type="button" class="btn" >
+                                    <a class=' nav-link' href="{% url 'update_ngo' ngo.id %}">
+                                        <h6>Update</h6>
+        
+                                    </a>
+
+                                </button>
+                                
+
+                                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" >
+                                    Delete
+                                    <!-- <a class=' nav-link'  href="{% url 'delete_ngo' ngo.id %}">
+                                        <h6>Delete</h6>
+        
+                                    </a> -->
+
+                                </button>
+                              
+                                
+                              
+                            </div>
+                            
+                            
+                        </div>
+                        {% endif %}
+                        <div class="donate-size">
+
+                            <a class='nav-link donate-space' href={% url 'donation_instruction' ngo.id %}> <input class=" search-donate-btn" type="button" value="Donate"></a>
+                        </div>
+                        
+                      </div>
+                </div>
+
+            </div>
+
+            
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Alert !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete {{ngo.organization_name}} ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        
+          <form method="POST" action="">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                <a  class="nav-link" href="{% url 'delete_ngo' ngo.id %}">
+                    Confirm
+                </a>    
+                    
+                
+                </button>
+
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+    </div>
+
+
+
+</div>
+
+
+<script>
+function handleSelect(){
+    alert("==== HElllo")
+}
+</script>
+
+
+{% endblock content%}

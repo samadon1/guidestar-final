@@ -1,0 +1,70 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+
+<head>
+    <title>Join Us</title>
+</head>
+
+<body>
+
+
+    <div class="landing-grid">
+        <div class="landing-grid-text">
+            <h1>Join Us</h1>
+            <p>Reprehenderit esse labore id veniam ut veniam non ex adipisicing amet ullamco dolor proident.</p>
+        </div>
+        <div class="landing-grid-img">
+            <img src="https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?cs=srgb&dl=pexels-evg-kowalievska-1170979.jpg&fm=jpg"
+                alt="">
+        </div>
+    </div>
+
+    
+
+    
+
+    <div class="col-row-grid">
+        <div>
+            {% if submitted %}
+            <div class="alert alert-success" role="alert" style="margin: 100px 50px;">
+                <h4 class="alert-heading">Congratulations !</h4>
+                <p>Your Non-Profit was created succesfully!!</p>
+                <hr>
+                <p class="mb-0">You can now update your page information and show the amazing work
+                    you are doing.
+                </p>
+              </div>
+                
+               
+
+            {% else %}
+                <form  class="form-border" method= 'POST' action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.as_p}}
+                    
+                    <input size="35" class="donation-submit volunteer-btn donation-btn " type="submit" value="Continue">
+
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="tags location grid-margin">
+            <h4>How it works</h4>
+            <p>
+                1. You tell us about your organization and the great work you are doing.
+
+            </p>
+            <p>2. We will contact you to discuss your application </p>
+            <p>3. You will be notified when your profile is up and running!</p>
+            <br>
+
+        
+
+        </div>
+    </div>
+
+</body>
+{% endblock content%}

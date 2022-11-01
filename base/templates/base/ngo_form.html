@@ -1,0 +1,66 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<div>
+    <form class="form-border" method= 'POST' enctype='multipart/form-data'>
+         {% csrf_token %}
+         {% comment %} {{ form.media }} {% endcomment %}
+
+      
+         {{form.as_p}}
+         <a target="_blank" href="{% url 'show_pdf' ngo.id %}">Click to view this compliance doc</a>
+         {{ngo.compliance_doc}}
+
+         <br><br>
+
+         <!-- <h3>Donation details</h3>
+         <br><br>
+
+         {{donationForm.as_p}} -->
+
+         <br><br>
+          <h3>Donation Instruction</h3>
+          <p>Tell us how to donate</p>
+        <br>
+        {{instruction.as_p}}
+        <br><br>
+
+         <h3>Organization Page Information</h3>
+         <p>Tell us about your organization</p>
+         <br><br>
+
+        
+         {{page.as_p}}
+
+            <br><br>
+        <h3>Our Programs</h3>
+        <p>Tell us about the current programs you offer</p>
+
+        <br>
+          {{programs.as_p}}
+<br><br>
+          <h3>Our Impact</h3>
+          <p>Tell us about the impact you've made</p>
+        <br>
+        {{impactForm.as_p}}
+
+        <br><br>
+          <h3>Help Us</h3>
+          <p>Tell us how others can help</p>
+        <br>
+        {{supportForm.as_p}}
+
+        <br><br>
+          <h3>Donation Use</h3>
+          <p>Tell us about how donation dollars are used</p>
+        <br>
+        {{donationForm.as_p}}
+
+         <input type='submit' value= 'Submit'/>
+    </form>
+</div>
+
+
+
+{% endblock content %}

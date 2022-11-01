@@ -1,0 +1,101 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+
+<!-- <h4>{{ user.username|title}}</h4> -->
+
+<div class="grid-padding w-80 d-block">
+    <h2>Claim requests</h2>
+    <br>
+    {% if request.user.is_superuser %}
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'user_profile' %}">All NGOs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'all_claim_request' %}">Claim requests <span class="badge btn-danger "> {{claim_count}}</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'verification' %}">Verification request <span class="badge btn-danger "> {{verification_count}}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'upload_csv' %}">Upload web data(CSV)</a>
+          </li>
+      </ul>
+      {% endif %}
+      <hr>
+    <br>
+    Result: {{claim_profiles.count}}
+
+    <div>
+        {% for profile in claim_profiles %}
+
+        <div>
+            {% if request.user == ngo.host %}
+            <button class="btn btn" ><a class=' nav-link' href="{% url 'update_ngo' ngo.id %}">Update</a></button>
+            <button class="btn btn" ><a class=' nav-link' href="{% url 'delete_ngo' ngo.id %}">Delete</a></button>
+            {% endif %}
+
+        
+            <div class="search-grid searchbox-effect ">
+
+
+                <div class="search-grid-img">
+                    {% if profile.ngo.profile_picture %}
+                        <img src="{{profile.ngo.profile_picture}}" >
+                    {% endif %}
+                </div>
+                <div class="search-item">
+                    <h3><a class="remove-style" href="{% url 'ngo' profile.ngo.id %}">{{profile.ngo.organization_name}}</a></h3>
+                    <p>
+                        {% if profile.host is None %}
+                        Host: <strong><span style="color: red;" >Not owned</span></strong> 
+                        {% else %}
+                        Host: <strong><span style="color: green;" >Already owned</span></strong> 
+                        {% endif %}
+                        <br>
+                        Claimer: {{profile.full_name}}, {{profile.connection}}
+                        <br>
+                        Role:   {{profile.role}}
+                        <br>
+                        Phone: {{profile.phone}}
+                        <br>
+                        Email: {{profile.email_address}}
+                        <br>
+                        Website: {{profile.organization_website}}
+                        <br>
+                        Location: {{profile.location}}
+                        <br>
+                        {% if profile.compliance_doc %}
+                            Compliance document: <a href="{{profile.compliance_doc.url}}">Click to download document </a>
+                        {% else %}
+                        {% endif %}
+                        
+                    </p>
+                    <div class="search-grid search-grid-sub ">
+                        <div>
+                            <a href="{% url 'delete_claim' profile.id %}"><button class="btn btn-danger" >Delete claim</button></a>
+                            <a href="{% url 'accept_claim' profile.email_address %}"><button class="btn btn-primary" >Accept claim</button></a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+
+   
+
+
+
+</div>
+    
+
+
+{% endblock content %}

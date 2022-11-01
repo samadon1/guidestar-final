@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/home.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/styles.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+    <title>Homepage</title>
+</head>
+
+<body>
+    {% include 'base/navbar.html' %}
+
+    <div class="home">
+        <div>
+            <div class="home-grid section-pad">
+                <div class="home-grid-item">
+                    <h1>Connecting you with the nonprofit information you need</h1>
+                    <p>
+                        Search GuideStar for the most complete, up-to-date nonprofit data
+                        available.
+                    </p>
+                </div>
+                <div class="home-grid-item">
+                    <img class="home-grid-item-img"
+                        src="https://www.guidestar.org/App_Themes/MainSite2/images/candid/GS-home-top.png" alt="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="home-form-style home-grid section-pad">
+            <div>
+                <form method="GET" action="{% url 'home' %}">
+                    <div class="input-group">
+                        <input size="50" name="q" type="text" class="form-control rounded"
+                            placeholder="GuideStar Basic Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="submit-search-btn">
+                            <h5>Search</h5>
+                        </button>
+                    </div>
+
+                    <!-- <input size="100" type = 'text'  placeholder = " search nonprofits by name, subject area, keyword, location... " > -->
+                    <!-- <input class="" type="submit" value="Search"> -->
+                </form>
+            </div>
+            <div>
+                <button class="register-btn" type="text">Register for free</button>
+            </div>
+        </div>
+
+        <div class="home-features section-pad section-bp">
+            <div class="features-grid-item">
+                <h2>Premier destination for nonprofits and nonprofit research</h2>
+            </div>
+            <div class="features-grid">
+                <div class="features-grid-item">
+                    <img src="https://www.guidestar.org/App_Themes/MainSite2/images/candid/GS-home-platinum-profile@2x.png"
+                        alt="" />
+                    <h3>Attract donors with your nonprofit profile</h3>
+                    <p>
+                        Claim and update your organization’s nonprofit profile. Earn a
+                        Seal of Transparency to give donors the information they need to
+                        support you. (Good news: it’s free.)
+                    </p>
+                    <button type="text">Update now</button>
+                </div>
+                <div class="features-grid-item">
+                    <img src="https://www.guidestar.org/App_Themes/MainSite2/images/candid/GS-home-analysis@2x.png"
+                        alt="" />
+
+                    <h3>Attract donors with your nonprofit profile</h3>
+                    <p>
+                        Claim and update your organization’s nonprofit profile. Earn a
+                        Seal of Transparency to give donors the information they need to
+                        support you. (Good news: it’s free.)
+                    </p>
+                    <button type="text">Learn more</button>
+                </div>
+                <div class="features-grid-item">
+                    <img src="https://www.guidestar.org/App_Themes/MainSite2/images/candid/GS-home-support@2x.png"
+                        alt="" />
+                    <h3>Attract donors with your nonprofit profile</h3>
+                    <p>
+                        Claim and update your organization’s nonprofit profile. Earn a
+                        Seal of Transparency to give donors the information they need to
+                        support you. (Good news: it’s free.)
+                    </p>
+                    <button type="text">schedule Consultation</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-pad">
+            <div class="features-grid-item">
+                <h2>
+                    Stay up to date on the latest facts and insights on nonprofits
+                </h2>
+            </div>
+            <div class="home-grid">
+                <div class="features-details-text">
+                    <div>
+                        <h3>Quantity</h3>
+                        <p>
+                            — Easily search 1.8 million IRS-recognized tax-exempt
+                            organizations, and thousands of faith-based nonprofits
+                        </p>
+                        <p>
+                            — Gather insights on financials, people/leadership, mission, and
+                            more
+                        </p>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <h3>Quality</h3>
+                        <p>
+                            — Authoritative data derived from validated sources, including
+                            990s and direct reporting—verified and updated daily
+                        </p>
+                        <p>
+                            — Best-in-sector proprietary data processing enabling
+                            comprehensive analysis
+                        </p>
+                    </div>
+                    <br>
+
+                    <div>
+                        <h3>Productivity (instead of speed)</h3>
+                        <p>
+                            — Expand your research and analysis efficiency—our products do the
+                            heavy lifting
+                        </p>
+                        <p>
+                            Power your systems/applications with our premier nonprofit data
+                            via APIs
+                        </p>
+                    </div>
+                </div>
+                <div class="features-details">
+                    <img src="https://www.guidestar.org/App_Themes/MainSite2/images/candid/GS-home-stay-up-to-date.png"
+                        alt="" srcset="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="home-banner">
+            <h2>Access nonprofit analysis solutions you need. Get started</h2>
+        </div>
+
+
+        <div class="testimonial section-pad">
+            <div class="home-grid">
+                <div class="testimonial-left">
+                    <h1>We power philanthropy</h1>
+                    <p>Our data is at the heart of 230+ websites, programs, and applications, including:</p>
+
+                    <div class="features-grid-item">
+                        <button type="text">Update your profile now</button>
+
+                    </div>
+
+
+                </div>
+                <div>
+                    <p class="testimonial-text">"Nonprofit profiles help the sector take a leap forward from data and
+                        information about charities to
+                        powerful knowledge and insight to help us make informed decisions."</p>
+
+                    <br><br>
+                    <p> <strong> —Victoria Vrana, </strong><br>
+                        Senior Program Officer, The Bill & Melinda Gates <br> Foundation</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% include "base/footer.html" %}
+</body>
+
+</html>
