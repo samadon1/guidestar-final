@@ -36,11 +36,11 @@ class Ngo(models.Model):
     location =  models.CharField(max_length=500, null= True, blank = True)
     EIN = models.CharField(max_length=500, null= True, blank = True)
     description = models.TextField(null=True, blank=True)
-    profile_picture = models.ImageField(null = True, blank = True,upload_to="media/images/")
+    profile_picture = models.ImageField(max_length = 2000, null = True, blank = True,upload_to="media/images/")
     checked = models.BooleanField(verbose_name='Non profit staff', default=False)
     verified  = models.BooleanField(default=False)
     request  = models.BooleanField(default=False)
-    compliance_doc = models.FileField(upload_to='media/doc/', blank=True, null=True)
+    compliance_doc = models.FileField(max_length = 2000, upload_to='media/doc/', blank=True, null=True)
 
     # user_page = models.ForeignKey(Page,on_delete=models.SET_NULL,null=True, blank = True)
     
