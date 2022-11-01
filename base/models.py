@@ -26,8 +26,8 @@ class Category(models.Model):
 class Ngo(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    organization_name = models.TextField()
-    principal_officer = models.CharField(max_length=200, null= True, blank = True)
+    organization_name = models.CharField(max_length=200)
+    principal_officer = models.CharField(max_length=200, null= True, blank = False)
     contact_person = models.CharField(max_length=200, null= True, blank = True)
     phone_number = PhoneNumberField(max_length=40, null= True, blank = True)
     email_address = models.EmailField(max_length=254 , null= True, blank = True)
@@ -36,11 +36,11 @@ class Ngo(models.Model):
     location =  models.CharField(max_length=500, null= True, blank = True)
     EIN = models.CharField(max_length=500, null= True, blank = True)
     description = models.TextField(null=True, blank=True)
-    profile_picture = models.ImageField(max_length = 2000, null = True, blank = True,upload_to="media/images/")
+    profile_picture = models.ImageField(null = True, blank = True,upload_to="media/images/")
     checked = models.BooleanField(verbose_name='Non profit staff', default=False)
     verified  = models.BooleanField(default=False)
     request  = models.BooleanField(default=False)
-    compliance_doc = models.FileField(max_length = 2000, upload_to='media/doc/', blank=True, null=True)
+    compliance_doc = models.FileField(upload_to='media/doc/', blank=True, null=True)
 
     # user_page = models.ForeignKey(Page,on_delete=models.SET_NULL,null=True, blank = True)
     
@@ -60,13 +60,13 @@ class Ngo(models.Model):
 
 class Reviews(models.Model):
     USER_TYPE = (
-        ('D', 'D'),
-        ('S', 'S'),
-        ('P', 'P'),
+        ('D', 'Donor'),
+        ('S', 'Supporter'),
+        ('P', 'Partner'),
     )
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE)
     name = models.TextField()
-    user_type = models.CharField(max_length=2,choices = USER_TYPE, default='D')
+    user_type = models.CharField(max_length = 2, choices = USER_TYPE, default='D')
     date = models.DateTimeField(auto_now_add= True)
     comment = models.TextField()
     
@@ -353,16 +353,16 @@ class Csv(models.Model):
 
 class ClaimProfile(models.Model):
     CONNECTIONS = (
-        ('S', 'S'),
-        ('B', 'B'),
-        ('V', 'V'),
-        ('C', 'C'),
+        ('Staff', 'Staff'),
+        ('Board member', 'Board member'),
+        ('Volunteer', 'Volunteer'),
+        ('Consultant', 'Consultant'),
     )
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     ngo = models.ForeignKey(Ngo, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200, null= False, blank = True)
     role = models.TextField(verbose_name="Briefly describe your role ", max_length=200, null= False, blank = True)
-    connection = models.CharField(verbose_name="How are you connected to the organization?", max_length=200, choices = CONNECTIONS, default='S')
+    connection = models.CharField(verbose_name="How are you connected to the organization?",max_length = 20, choices = CONNECTIONS, default='Staff')
     phone = PhoneNumberField(max_length=40, null= False, blank = True)
     email_address = models.EmailField(max_length=254 , null= False, blank = True)
     organization_website = models.URLField(max_length=200, null= False, blank = True)
