@@ -832,7 +832,7 @@ def upload_file_view(request):
         obj = Csv.objects.get(activated = False)
         obj.activated = True
         obj.save()
-        with open(obj.file_name.path, 'r') as f:
+        with open(obj.file_name.path, 'r', encoding="latin1", errors='ignore') as f:
             reader = csv.reader(f)
 
             for i, row in enumerate(reader):
